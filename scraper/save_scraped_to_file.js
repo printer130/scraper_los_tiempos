@@ -11,7 +11,6 @@ export async function saveScrapedToFile(data, dbName) {
   }
 }
 
-
 /* export function readDBFile(dbName) {
   return readFile(`${DB_PATH}/${dbName}.json`, 'utf-8').then(JSON.parse)
 }
