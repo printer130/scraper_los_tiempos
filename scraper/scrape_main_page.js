@@ -1,24 +1,21 @@
 import { cleanText } from '../utils/index.js'
-
 const selectors = [
-  ["title", '.views-field-title', false],
-  ["href", ".views-field .field-content > a", "attr"],
-  ["src", ".views-field .field-content a img", "attr"]
+  ['.views-field-title', false],
+  ['.field-content > a', 'href'],
+  ['.field-content a img', "src"],
+  ['.date-display-single', false],
+  ['.views-field-seccion', false]
 ]
+
 export async function scrapeMainPage($) {
   const $rows = $(".noticia-paywall1")
   const news = []
 
   $rows.each((i, v) => {
-    const result_mapped = selectors.map(([attribute, className, attr]) => {
-
-      const isAttr = typeof attr === "string"
-      const haveAttr = $(v).find(className).attr(attribute)
-      const str = cleanText($(v).find(className).text())
-
-      return (attribute, isAttr
-        ? haveAttr
-        : str)
+    const result_mapped = selectors.map(([className, attr]) => {
+      return attr
+        ? $(v).find(className).attr(attr)
+        : cleanText($(v).find(className).text())
     })
     news.push(result_mapped)
   })
