@@ -10,10 +10,10 @@ const pages_targeted = [
 ]
 
 for (const { pageURL, fn } of pages_targeted) {
+  console.log('Initialize scraper!')
   const $ = await scraper(pageURL)
-  const data = await fn($)
-  console.log(data)
   console.log('Scraping to: ', pageURL)
+  const data = await fn($)
   await saveScrapedToFile(data, "main_page")
   console.log("[DONE :D!]")
 }
